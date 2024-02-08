@@ -12,6 +12,7 @@
             step="1"
             class="stepper-icon py-0"
             @click="goToStories"
+            "test"
           >
             Stories
           </v-stepper-step>
