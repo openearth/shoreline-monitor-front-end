@@ -96,6 +96,7 @@ jobs:
       contents: 'read'
       id-token: 'write'
 
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
