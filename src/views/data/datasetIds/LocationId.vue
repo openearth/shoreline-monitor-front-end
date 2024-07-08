@@ -10,16 +10,32 @@
       <h2 class="h2">
         Metocean
       </h2>
-      <v-btn icon class="close-button" @click="close">
+      <v-btn
+        icon
+        class="close-button"
+        @click="close"
+      >
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      <div class="flex-grow-1 py-3 scrollbar" align-space-between>
-        <v-expansion-panels flat accordion multiple color="background">
+      <div
+        class="flex-grow-1 py-3 scrollbar"
+        align-space-between
+      >
+        <v-expansion-panels
+          flat
+          accordion
+          multiple
+          color="background"
+        >
           <v-expansion-panel
             v-for="data in datasets"
             :key="`${locations}-${data.id}-${activeSummaryId}`"
           >
-            <v-expansion-panel-header class="h4" color="background" dark>
+            <v-expansion-panel-header
+              class="h4"
+              color="background"
+              dark
+            >
               {{ data.datasetName }}
             </v-expansion-panel-header>
             <v-expansion-panel-content color="background">
@@ -31,8 +47,8 @@
                 :collapsible="true"
                 :units="data.units"
                 :type="data.type"
-                :timeFormatType="data.timeFormat"
-                :timeSpanType="data.timeSpan"
+                :time-format-type="data.timeFormat"
+                :time-span-type="data.timeSpan"
                 :parameter-id="data.id"
                 :title="data.datasetName"
                 :set-mark-point="data.id === getActiveRasterLayer"
@@ -41,7 +57,11 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
-            <v-expansion-panel-header class="h4" color="background" dark>
+            <v-expansion-panel-header
+              class="h4"
+              color="background"
+              dark
+            >
               Time series
             </v-expansion-panel-header>
             <v-expansion-panel-content color="background">
@@ -49,7 +69,11 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
-            <v-expansion-panel-header class="h4" color="background" dark>
+            <v-expansion-panel-header
+              class="h4"
+              color="background"
+              dark
+            >
               Rose plot
             </v-expansion-panel-header>
             <v-expansion-panel-content color="background">
@@ -57,7 +81,11 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
-            <v-expansion-panel-header class="h4" color="background" dark>
+            <v-expansion-panel-header
+              class="h4"
+              color="background"
+              dark
+            >
               Extreme values
             </v-expansion-panel-header>
             <v-expansion-panel-content color="background">
@@ -65,7 +93,11 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
-            <v-expansion-panel-header class="h4" color="background" dark>
+            <v-expansion-panel-header
+              class="h4"
+              color="background"
+              dark
+            >
               Weather window
             </v-expansion-panel-header>
             <v-expansion-panel-content color="background">
@@ -83,7 +115,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api'
+import { ref, onMounted, onUnmounted, computed, watch, getCurrentInstance } from 'vue'
 import _ from 'lodash'
 import flatten from 'lodash/flatten'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
@@ -98,11 +130,6 @@ import {
 
 export default {
   components: { GraphLine, TimeSeries, RosePlot, ExtremeValues, WeatherWindow },
-  data() {
-    return {
-      expandedDatasets: []
-    }
-  },
   setup() {
     const option = ref({
       title: {
@@ -144,6 +171,11 @@ export default {
     })
 
     return { option }
+  },
+  data() {
+    return {
+      expandedDatasets: []
+    }
   },
   computed: {
     ...mapGetters([
